@@ -1,23 +1,25 @@
+import { useContext } from "react";
+import { QuestionsContext } from "../../providers/Questions";
+import { PlayerDataContext } from "../../providers/PlayerData";
 import { DivHeader } from "./style";
 
+
+
 const Header = () => {
+
+  const { showComponent} = useContext(QuestionsContext);
+  const { name } = useContext(PlayerDataContext);
+
   return (
-    <>
-      {1 < 10 ? (
+    <>    
+      {showComponent === "home" ? (
         <DivHeader>
-          <h2>BEM-VINDO AO ECONOQUIZ</h2>
+          <h1>Welcome to ECONOQUIZ</h1>
         </DivHeader>
       ) : (
-        <>
           <DivHeader>
-            <h2>NÍVEL: EASY</h2>
-            <h4>name</h4>
+            <h2>{name}</h2>
           </DivHeader>
-          {/* <DivHeader>
-            <h2>TOTAL 6 DE 10</h2>
-            <h4>name</h4>
-          </DivHeader> */}
-        </>
       )}
     </>
   );

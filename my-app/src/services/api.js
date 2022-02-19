@@ -1,5 +1,7 @@
 import axios from "axios";
 
-export const api = axios.create({
-  baseURL: "https://quizapi.io/api/v1/questions"
+const api = axios.create({
+  baseURL: "https://quizapi.io/api/v1"
 });
+
+export default api

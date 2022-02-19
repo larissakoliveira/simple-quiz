@@ -1,32 +1,58 @@
-import { useState } from "react";
+import { useContext, useEffect } from "react";
+import { PlayerDataContext } from "../../providers/PlayerData";
+import { QuestionsContext } from "../../providers/Questions";
 import { FormSection, StyledLabel, Button } from "./style";
+import brainHomeImage from "../../assets/homeImage.gif"
 
-const Main = () => {
+const Form = () => {
+  const { setName, name } = useContext(PlayerDataContext);
+  const {
+    setLevel,
+    getQuiz,
+    setShowComponent,
+    questionsThatHaveMoreThanFourAnswers
+  } = useContext(QuestionsContext);
 
-  const [start, setStart] = useState(false);
+  useEffect(() => {
+    getQuiz();
+  }, []);
 
-  const startQuiz = () => {
-    setStart(!start)
-  }
+  const handleSubmit = (e) => {
+    if (!name) {
+      return "";
+    } else {
+      e.preventDefault();
+      setShowComponent("quiz");
+      getQuiz();
+      questionsThatHaveMoreThanFourAnswers();
+    }
+  };
 
   return (
     <FormSection>
+        <img src={brainHomeImage} alt="brainHomeImage"/>
       <StyledLabel>
-        Digite seu nome
-        <input required type="text" name="name" />
+        Please, enter your name!
+        <input
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Name"
+          required
+          type="text"
+          name="name"
+        />
       </StyledLabel>
       <StyledLabel>
-        Escolha seu nível
-        <select>
-          <option value="easy" selected="selected">
-            Fácil
+        Select your level
+        <select onChange={(e) => setLevel(e.target.value)}>
+          <option value="easy" defaultValue="easy">
+            EASY
           </option>
-          <option value="hard">Díficil</option>
+          <option value="hard">HARD</option>
         </select>
       </StyledLabel>
-      <Button onClick={startQuiz}>Começar</Button>
+      <Button onClick={(e) => handleSubmit(e)}>START</Button>
     </FormSection>
   );
 };
 
-export default Main;
+export default Form;

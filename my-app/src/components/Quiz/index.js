@@ -1,63 +1,47 @@
-// import { DivHeader } from "./style";
-import api from "../../services/api";
-import { useState } from "react";
+import { useContext } from "react";
+import { QuestionsContext } from "../../providers/Questions";
+import { QuizContainer, OptionsContainer } from "./style";
+import { Button } from "../Form/style";
+
 
 const Quiz = () => {
+  const {
+    level,
+    getAnswers,
+    loading,
+    getNextQuestion,
+    nextQuestionIndex,
+    questions,
+  } = useContext(QuestionsContext);
+console.log(questions)
+console.log(questions[nextQuestionIndex])
 
-    const [questions, setQuestions] = useState(0);
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [score, setScore] = useState(0);
-	const [showScore, setShowScore] = useState(false);
-	
-	const handleAnswerOptionClick = (isCorrect) => {
-        if (isCorrect) {
-            setScore(score + 1);
-		}
-        
-		const nextQuestion = currentQuestion + 1;
-		if (nextQuestion < 10) {
-            setCurrentQuestion(nextQuestion);
-		} else {
-            setShowScore(true);
-		}
-	};
-    api
-    .get("/products")
-    .then((response) => {
-      setQuestions(response.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  return (
+    <QuizContainer>
+      <h3 className='level'>LEVEL: {level}</h3>
+      <h2 className="questionTitle">Question {nextQuestionIndex + 1}</h2>
 
+      {loading && <h2>Loading</h2>}
 
-    return (
-        <>
-       <div>
-			{showScore ? (
-				<div>
-					Você fez {score} de 10
-				</div>
-			) : (
-				<>
-					<div>
-						<div>
-							<span>Pergunta {currentQuestion + 1}</span>/10
-						</div>
-						<div>{questions[currentQuestion].questionText}</div>
-					</div>
-					<div>
-						{questions[currentQuestion].answerOptions.map((answerOption) => (
-                            // #ver como é o retorno
-							<button onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
-						))}
-					</div>
-				</>
-			)}
-		</div>
-        </>
-    )
-}
+      <h3>{questions[nextQuestionIndex]["question"]}</h3>
+      <OptionsContainer>
+        {/* {questions &&
+          Object.values(questions[nextQuestionIndex]).map((item, index) => {
+            for (let value of Object.values(item["answers"])) {
+              if (value != null) {
+                <Button key={index}>{value}</Button>;
+              }
+            }
+          })} */}
+      </OptionsContainer>
 
+      {nextQuestionIndex < 9 ? (
+        <Button onClick={getNextQuestion}>NEXT</Button>
+      ) : (
+        <Button onClick={getAnswers}>FINISH</Button>
+      )}
+    </QuizContainer>
+  );
+};
 
 export default Quiz;

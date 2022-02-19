@@ -6,7 +6,7 @@ import { Button } from "../Form/style";
 
 const Answers = () => {
 
-    const { getNewQuiz, setShowComponent, setNextQuestionIndex, setQuestions, questions } = useContext(QuestionsContext);
+    const { getNewQuiz, setShowComponent, setNextQuestionIndex, setQuestions, data, questions, nextQuestionIndex } = useContext(QuestionsContext);
     const { setName } = useContext(PlayerDataContext);
 
     const getNewPlayer = () => {
@@ -21,9 +21,9 @@ const Answers = () => {
         <AnswersContainer>
         <h2>You got <span>{}</span> out of 10</h2>
         <h2>Check the answers</h2>
-
-
-    {/* {questions && Object.values(questions["question"]).map((item) => {
+        correct_answers
+        {/* <h3>{questions[nextQuestionIndex]["question"]}</h3> */}
+    {questions && Object.values(questions["question"]).map((item) => {
         for (let [value] of Object.values(questions["answers"])) {
             <>
             <h4>{item}</h4>
@@ -32,7 +32,7 @@ const Answers = () => {
           
         }
       })
-      } */}
+      }
 
         <Button onClick={getNewQuiz}>Restart</Button>
         <Button onClick={getNewPlayer}>New player</Button>

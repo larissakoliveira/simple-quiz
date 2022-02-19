@@ -37,6 +37,11 @@ export const QuizContainer = styled.div`
         font-weight: bold;
     }
 
+    .loading {
+        color: #751f65;
+        padding: 70px;
+    }
+
     div{
         margin-top: 15px;
     }

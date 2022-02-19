@@ -5,7 +5,6 @@ export const QuestionsContext = createContext();
 
 export const QuestionsProvider = ({ children }) => {
   const [questions, setQuestions] = useState([]);
-  // const [options, setOptions] = useState([]);
   const [data, setData] = useState("data");
   const [level, setLevel] = useState("Easy");
   const [showComponent, setShowComponent] = useState("home");
@@ -30,34 +29,31 @@ export const QuestionsProvider = ({ children }) => {
         console.log(error);
       });
   };
-
+// console.log(data)
   const questionsThatHaveMoreThanFourAnswers = () => {
     data &&
-      Object.values(data).map((item) => {
+      Object.values(data).map((item) => {   
+        console.log(item)
         for (let [key, value] of Object.entries(item["answers"])) {
-          if (key === "answer_d" && value != null) {
-            questions.push(item);
+          delete item["answers"]["answer_f"]; 
+          delete item["answers"]["answer_e"]; 
+          // console.log(item["answers"])
+          if (key === "answer_d" && value != null) { 
+            setQuestions([...questions,item])
+            console.log(item)
+            console.log(questions)
+            console.log(questions[nextQuestionIndex]["question"])
+            console.log(questions[nextQuestionIndex]["answers"])
           }
         }
       });
   };
 
 
-  // const getPossibleAnswers = () => {
-  //   questions &&
-  //     Object.values(questions).map((item) => {
-  //       const auxiliarArray = [];
-  //       for (let value of Object.values(item["answers"])) {
-  //         if (value != null) {
-  //           auxiliarArray.push(value);
-  //         }
-  //       }
-  //       options.push(auxiliarArray);
-  //     });
-  // };
-
   const getNextQuestion = () => {
+    questionsThatHaveMoreThanFourAnswers()
     setNextQuestionIndex(nextQuestionIndex + 1);
+    return questions[nextQuestionIndex]
   };
 
   const getAnswers = () => {

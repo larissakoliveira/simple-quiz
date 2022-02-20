@@ -5,8 +5,8 @@
 }
 
 .App {
-  /* background: linear-gradient(45deg, #F0463F,#F8EF3C, #65BE6C, #F9A02E, #31C1ED); */
-  background: linear-gradient(45deg, #E1ADC0, #c5dae4, #be5eab);
+  /* background: linear-gradient(45deg, #E1ADC0, #c5dae4, #be5eab); */
+  background: linear-gradient(45deg, #353133, #acacac, #020202);
   border: 25px double rgba(51, 99, 131, 0.52);
   border-radius: 8px;
   min-height: 100vh;

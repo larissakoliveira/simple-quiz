@@ -42,6 +42,10 @@ export const QuizContainer = styled.div`
         padding: 70px;
     }
 
+    img{
+        width: 50px;
+    }
+
     div{
         margin-top: 15px;
     }

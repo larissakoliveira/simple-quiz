@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { QuestionsContext } from "../../providers/Questions";
 import { QuizContainer, OptionsContainer } from "./style";
 import { Button } from "../Form/style";
-
+import brainImage from "../../assets/homeImage.gif"
 
 const Quiz = () => {
   const {
@@ -12,50 +12,52 @@ const Quiz = () => {
     getNextQuestion,
     nextQuestionIndex,
     questions,
+    handleAnswer,
   } = useContext(QuestionsContext);
-
-  // const [options, setOptions] = useState([])
-
-
-  // const getOptions = () => {
-  //   Object.values(questions[nextQuestionIndex]["answers"]).map((item) => {
-  //           if (item != null){
-  //             setOptions(item)
-  //           }
-  //         }
-  //   )}
 
 
   return (
     <QuizContainer>
-      <h3 className='level'>LEVEL: {level}</h3>
-      <h2 className="questionTitle">Question {nextQuestionIndex + 1}</h2>
+      <h3 className="level">LEVEL: {level}</h3>
 
       {loading && <h2 className="loading">LOADING YOUR QUIZ...</h2>}
+      { 
+      nextQuestionIndex < 10 ? (
+        <>
+        <h2 className="questionTitle">Question {nextQuestionIndex + 1}</h2>
 
-      <h3>{questions[nextQuestionIndex]["question"]}</h3>
+        <h3>{questions[nextQuestionIndex]["question"]}</h3>
+        </>
+
+      ): (
+        <>
+      <img src={brainImage} alt='brainImage'/>
+      <h2>Final score {}</h2>
+        </>
+      )
+      }
       <OptionsContainer>
-        { 
         
-           Object.values(questions[nextQuestionIndex]["answers"])
-          .map((item) => (
-            // if (item == null) {
-              <button>{item}</button>
-              // }
-            //   console.log(item)
-            // console.log(Object.values(questions[nextQuestionIndex]["answers"]))
- 
-            // questions && Object.values(item["answers"]).map((value) => {
-            // })
-          ))
+        { nextQuestionIndex < 10 ? (
+        Object.entries(questions[nextQuestionIndex]["answers"]).map(([key,value]) => (
+          <button
+          key={key}
+          onClick={() => handleAnswer(key)}
+          >
+            {value}
+          </button>
+          ))) : (
+            <Button onClick={getAnswers}>CHECK THE ANSWERS</Button>
+            )
           }
+        
       </OptionsContainer>
 
-      {nextQuestionIndex < 9 ? (
-        <Button onClick={getNextQuestion}>NEXT</Button>
-      ) : (
-        <Button onClick={getAnswers}>FINISH</Button>
-      )}
+      {/* // {nextQuestionIndex < 9 ? (
+      //   <Button onClick={getNextQuestion}>NEXT</Button>
+      // ) : (
+      //   <Button onClick={getAnswers}>FINISH</Button>
+      // )} */}
     </QuizContainer>
   );
 };

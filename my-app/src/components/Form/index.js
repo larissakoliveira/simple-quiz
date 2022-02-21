@@ -12,6 +12,7 @@ const Form = () => {
     updateGetQuiz,
     setShowComponent,
     questionsThatHaveMoreThanFourAnswers,
+    // getTextRightAnswers
   } = useContext(QuestionsContext);
 
   useEffect(() => {
@@ -26,6 +27,8 @@ const Form = () => {
       setShowComponent("quiz");
       getQuiz();
       questionsThatHaveMoreThanFourAnswers();
+      // getTextRightAnswers();
+
     }
   };
 

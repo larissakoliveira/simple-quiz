@@ -10,12 +10,13 @@ export const QuestionsProvider = ({ children }) => {
   const [showComponent, setShowComponent] = useState("home");
   const [loading, setLoading] = useState(true);
   const [nextQuestionIndex, setNextQuestionIndex] = useState(0);
-  const [score, setScore] = useState(1);
   const [correctAnswersByKey, setCorrectAnswersByKey] = useState([]);
   const [questionsText, setQuestionsText] = useState([]);
   const [playerAnswer, setPlayerAnswer] = useState("");
   const [updateGetQuiz, setupdateGetQuiz] = useState(false);
-  const [eachCorrectAnswer, setEachCorrectAnswer] = useState([]);
+  const [eachCorrectAnswer, setEachCorrectAnswer] = useState("");
+  const [correctAnswerText, setCorrectAnswerText] = useState([]);
+  const [score, setScore] = useState(0);
 
   const getQuiz = async () => {
     setLoading(true);
@@ -53,22 +54,18 @@ export const QuestionsProvider = ({ children }) => {
     questions &&
     questions.filter((item) => item.multiple_correct_answers === "false");
 
-  const checkPlayerAnswersAndScore = () => {
-    if (correctAnswersByKey) {
-      if (playerAnswer === eachCorrectAnswer) {
-        setScore(score + 1);
-      }
-    }
-  };
+    
+    
+    const handleAnswer = (item) => {
+      const correctLetter = item.split("_").pop();
+      setPlayerAnswer(correctLetter)
+      getNextQuestion();
 
-  const handleAnswer = (item) => {
-    setPlayerAnswer(item.split("_").pop());
-    getNextQuestion();
-  };
-
-  const getCorrectAnswersByKey = () => {
-    const auxArrayCorrectAnswers = [];
-    filterQuestion &&
+    };
+    
+    const getCorrectAnswersByKey = () => {
+      const auxArrayCorrectAnswers = [];
+      filterQuestion &&
       Object.values(filterQuestion).map((item) => {
         for (let [key, value] of Object.entries(item["correct_answers"])) {
           if (value === "true" && value !== null) {
@@ -76,19 +73,46 @@ export const QuestionsProvider = ({ children }) => {
           }
         }
       });
-    setEachCorrectAnswer(auxArrayCorrectAnswers[nextQuestionIndex]);
-  };
+      setEachCorrectAnswer(auxArrayCorrectAnswers[nextQuestionIndex]);
+    };
+    
+    const checkPlayerAnswersAndScore = () => {
+      if(playerAnswer){
+        if (playerAnswer === eachCorrectAnswer) {
+          console.log(playerAnswer, "jogador resposta")
+          console.log(eachCorrectAnswer, "correta resposta")
+          
+          setScore(score + 1);
+          
+        }
+      }
+    };
+    
+
+  const getTextRightAnswers = () => {
+    const answersObj = filterQuestion[nextQuestionIndex].answers
+
+    answersObj && Object.entries(answersObj).map(([key, value]) => {
+      
+      const letterAnswer = key.split("_").pop()
+      if(letterAnswer === eachCorrectAnswer){
+        setCorrectAnswerText([...correctAnswerText, value])
+      }
+    })
+  }
+
 
   const getNextQuestion = () => {
     setNextQuestionIndex(nextQuestionIndex + 1);
     getCorrectAnswersByKey();
-    setupdateGetQuiz(!updateGetQuiz);
+    // setupdateGetQuiz(!updateGetQuiz);
+    getTextRightAnswers();
     setQuestionsText([
       ...questionsText,
       filterQuestion[nextQuestionIndex]["question"],
     ]);
     checkPlayerAnswersAndScore();
-    return filterQuestion[nextQuestionIndex];
+    // filterQuestion[nextQuestionIndex];
   };
 
   const getAnswers = () => {
@@ -103,11 +127,11 @@ export const QuestionsProvider = ({ children }) => {
     setPlayerAnswer([]);
     setCorrectAnswersByKey([]);
     setQuestionsText([]);
+    setCorrectAnswerText([]);
     setScore(0);
     getQuiz();
   };
   
-  console.log(filterQuestion)
   return (
     <QuestionsContext.Provider
       value={{
@@ -124,9 +148,12 @@ export const QuestionsProvider = ({ children }) => {
         setQuestionsText,
         setPlayerAnswer,
         setScore,
+        getTextRightAnswers,
+        setCorrectAnswerText,
         showComponent,
         loading,
         nextQuestionIndex,
+        correctAnswerText,
         data,
         level,
         questionsText,

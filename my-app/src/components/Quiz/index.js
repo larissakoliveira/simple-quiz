@@ -28,7 +28,7 @@ const Quiz = () => {
         <>
           <h2 className="questionTitle">Question {nextQuestionIndex + 1}</h2>
 
-          <h3>{filterQuestion[nextQuestionIndex]["question"]}</h3>
+          <h3>{filterQuestion && filterQuestion[nextQuestionIndex]["question"]}</h3>      
         </>
       ) : (
         <>
@@ -69,7 +69,10 @@ const Quiz = () => {
               <button
                 className="options"
                 key={key}
-                onClick={() => handleAnswer(key)}
+                onClick={() => {
+                  console.log(key)
+                  handleAnswer(key)
+                  }}
               >
                 {value}
               </button>

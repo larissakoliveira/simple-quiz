@@ -5,11 +5,15 @@
 }
 
 .App {
-  /* background: linear-gradient(45deg, #E1ADC0, #c5dae4, #be5eab); */
-  background: linear-gradient(45deg, #353133, #acacac, #020202);
+  background-image: linear-gradient(
+    to right top,
+    #0d0f12,
+    #111b2a,
+    #142643,
+    #1c2f5d,
+    #2c3876
+  );
   border: 25px double rgba(51, 99, 131, 0.52);
   border-radius: 8px;
   min-height: 100vh;
 }
-
-

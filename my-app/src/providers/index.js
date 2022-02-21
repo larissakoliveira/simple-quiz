@@ -3,11 +3,9 @@ import { QuestionsProvider } from "./Questions";
 
 const Providers = ({ children }) => {
   return (
-      <PlayerDataProvider>
-        <QuestionsProvider>
-          {children}
-        </QuestionsProvider>
-      </PlayerDataProvider>
+    <PlayerDataProvider>
+      <QuestionsProvider>{children}</QuestionsProvider>
+    </PlayerDataProvider>
   );
 };
 export default Providers;

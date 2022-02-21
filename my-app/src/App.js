@@ -7,9 +7,7 @@ import Answers from "./components/Answers";
 import { QuestionsContext } from "./providers/Questions";
 
 export default function App() {
-  
-
-  const { showComponent} = useContext(QuestionsContext);
+  const { showComponent } = useContext(QuestionsContext);
 
   return (
     <div className="App">

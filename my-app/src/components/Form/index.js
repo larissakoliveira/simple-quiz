@@ -2,20 +2,21 @@ import { useContext, useEffect } from "react";
 import { PlayerDataContext } from "../../providers/PlayerData";
 import { QuestionsContext } from "../../providers/Questions";
 import { FormSection, StyledLabel, Button } from "./style";
-import brainHomeImage from "../../assets/homeImage.gif"
+import brainHomeImage from "../../assets/homeImage.webp";
 
 const Form = () => {
   const { setName, name } = useContext(PlayerDataContext);
   const {
     setLevel,
     getQuiz,
+    updateGetQuiz,
     setShowComponent,
-    questionsThatHaveMoreThanFourAnswers
+    questionsThatHaveMoreThanFourAnswers,
   } = useContext(QuestionsContext);
 
   useEffect(() => {
     getQuiz();
-  }, []);
+  }, [updateGetQuiz]);
 
   const handleSubmit = (e) => {
     if (!name) {
@@ -30,7 +31,7 @@ const Form = () => {
 
   return (
     <FormSection>
-        <img src={brainHomeImage} alt="brainHomeImage"/>
+      <img src={brainHomeImage} alt="brainHomeImage" />
       <StyledLabel>
         Please, enter your name!
         <input

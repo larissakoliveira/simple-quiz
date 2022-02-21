@@ -8,5 +8,6 @@ export const DivHeader = styled.div`
 
   h1, h2{
     text-align: center;
+    color: #AFB5D8;
   } 
 `;

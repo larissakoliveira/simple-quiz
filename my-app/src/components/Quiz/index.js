@@ -15,7 +15,7 @@ const Quiz = () => {
     loading,
     score,
     nextQuestionIndex,
-    filterQuestion,
+    questions,
     handleAnswer,
   } = useContext(QuestionsContext);
 
@@ -28,7 +28,7 @@ const Quiz = () => {
         <>
           <h2 className="questionTitle">Question {nextQuestionIndex + 1}</h2>
 
-          <h3>{filterQuestion && filterQuestion[nextQuestionIndex]["question"]}</h3>      
+          <h3>{questions[nextQuestionIndex]["question"] && questions[nextQuestionIndex]["question"]}</h3>      
         </>
       ) : (
         <>
@@ -64,13 +64,12 @@ const Quiz = () => {
       )}
       <OptionsContainer>
         {nextQuestionIndex < 10 ? (
-          Object.entries(filterQuestion[nextQuestionIndex]["answers"]).map(
+          Object.entries(questions[nextQuestionIndex]["answers"]).map(
             ([key, value]) => (
               <button
                 className="options"
                 key={key}
                 onClick={() => {
-                  console.log(key)
                   handleAnswer(key)
                   }}
               >

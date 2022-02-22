@@ -1,4 +1,22 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+// export const spanstyled = styled.span`
+//   margin-top: 5px;
+//   width: 28px;
+//   font-size: 6px;
+//   height: 12px;
+//   border: none;
+//   border-radius: 10px;
+//   background-color: deepskyblue;
+//   outline: none;
+//   cursor: pointer;
+
+//   ${(props) =>
+//     props.randomcoloranswer &&
+//     css`
+//       color: red;
+//     `};
+// `;
 
 export const AnswersContainer = styled.div`
   display: flex;
@@ -8,23 +26,54 @@ export const AnswersContainer = styled.div`
     margin: 7px auto;
   }
 
-  h1,
+  .score {
+    color: #000000;
+    opacity: 0.8;
+    font-size: 3rem;
+  }
+
+  div{
+    margin: 10px;
+    border: 3px solid #afb5d8;
+  }
+
   h2 {
     text-align: center;
     padding: 10px;
     color: #afb5d8;
   }
 
+
   h3,
   p {
     padding: 3px;
     color: #afb5d8;
     margin-left: 15px;
+    font-size: 16px;
   }
+
+
+
+  p {
+    color: #ffffff;
+  }
+
+  .question, .answer {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  // .answer {
+  //   color: red;
+  // }
 
   @media only screen and (min-width: 768px) {
     h3 {
       font-size: 18px;
+    }
+    p {
+      font-size: 16px;
+      margin-left: 30px;
     }
   }
 `;

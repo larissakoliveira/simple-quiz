@@ -2,22 +2,20 @@ import { useContext, useEffect } from "react";
 import { PlayerDataContext } from "../../providers/PlayerData";
 import { QuestionsContext } from "../../providers/Questions";
 import { FormSection, StyledLabel, Button } from "./style";
-import brainHomeImage from "../../assets/homeImage.webp";
+import brainHomeImage from "../../assets/homeImage.gif";
 
 const Form = () => {
   const { setName, name } = useContext(PlayerDataContext);
   const {
     setLevel,
     getQuiz,
-    updateGetQuiz,
     setShowComponent,
-    questionsThatHaveMoreThanFourAnswers,
-    // getTextRightAnswers
+    questionsWithFourAnswersAndNoMultipleAnswers,
   } = useContext(QuestionsContext);
 
   useEffect(() => {
     getQuiz();
-  }, [updateGetQuiz]);
+  }, []);
 
   const handleSubmit = (e) => {
     if (!name) {
@@ -26,8 +24,7 @@ const Form = () => {
       e.preventDefault();
       setShowComponent("quiz");
       getQuiz();
-      questionsThatHaveMoreThanFourAnswers();
-      // getTextRightAnswers();
+      questionsWithFourAnswersAndNoMultipleAnswers();
 
     }
   };

@@ -9,7 +9,7 @@ export const FormSection = styled.form`
 
   img {
     width: 200px;
-    opacity: 0.5;
+    opacity: 0.8;
     border-radius: 50%;
     margin: 15px;
   }

@@ -6,8 +6,9 @@ export const DivHeader = styled.div`
   align-items: center;
   flex-direction: column;
 
-  h1, h2{
+  h1,
+  h2 {
     text-align: center;
-    color: #AFB5D8;
-  } 
+    color: #afb5d8;
+  }
 `;

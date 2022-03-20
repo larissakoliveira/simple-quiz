@@ -1,12 +1,10 @@
 import { useContext } from "react";
 import { PlayerDataContext } from "../../providers/PlayerData";
 import { QuestionsContext } from "../../providers/Questions";
-import { AnswersContainer, spanstyled } from "./style";
+import { AnswersContainer } from "./style";
 import { Button } from "../Form/style";
-import { FaLongArrowAltRight } from 'react-icons/fa';
-import { CgArrowRight } from 'react-icons/cg';
-
-
+import { FaLongArrowAltRight } from "react-icons/fa";
+import { CgArrowRight } from "react-icons/cg";
 
 const Answers = () => {
   const {
@@ -14,7 +12,6 @@ const Answers = () => {
     getQuiz,
     setQuestions,
     questionsText,
-    setPlayerAnswer,
     setQuestionsText,
     correctAnswerText,
     setScore,
@@ -22,7 +19,7 @@ const Answers = () => {
     setShowComponent,
     setNextQuestionIndex,
     setCorrectAnswerText,
-    randomcoloranswer
+    setLevel
   } = useContext(QuestionsContext);
   const { setName } = useContext(PlayerDataContext);
 
@@ -33,15 +30,15 @@ const Answers = () => {
     setCorrectAnswerText([]);
     setQuestions([]);
     setName("");
-    setPlayerAnswer("");
     setScore(0);
+    setLevel("easy");
     getQuiz();
   };
 
-  const questionsAndAnswers = {}
-  questionsText.forEach((key, value) => questionsAndAnswers[key] = correctAnswerText[value]);
-
-  console.log(questionsAndAnswers)
+  const questionsAndAnswers = {};
+  questionsText.forEach(
+    (key, value) => (questionsAndAnswers[key] = correctAnswerText[value])
+  );
 
   return (
     <AnswersContainer>
@@ -50,14 +47,23 @@ const Answers = () => {
       </h2>
       <h2>Check the answers</h2>
 
-      {
-        Object.entries(questionsAndAnswers).map(([question, answer], index)=>(
-          <div key={question}>
-          <h3 key={question}>Question {index +1}<span className="question"> <FaLongArrowAltRight/></span>{question}</h3>
-          <p key={answer}>Answer<span className="answer" randomcoloranswer ><CgArrowRight/> {answer}</span></p>
-          </div>
-        ))
-      }
+      {Object.entries(questionsAndAnswers).map(([question, answer], index) => (
+        <div className="answerQuestionContainer" key={question}>
+          <h3 key={question}>
+            Question {index + 1}
+            <span className="question">
+              <FaLongArrowAltRight />
+            </span>
+            {question}
+          </h3>
+          <p key={answer}>
+            Answer
+            <span className="answer">
+              <CgArrowRight /> {answer}
+            </span>
+          </p>
+        </div>
+      ))}
 
       <Button onClick={restartQuiz}>Restart</Button>
       <Button onClick={getNewPlayer}>New player</Button>

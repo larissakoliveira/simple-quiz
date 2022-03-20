@@ -1,22 +1,4 @@
-import styled, { css } from "styled-components";
-
-// export const spanstyled = styled.span`
-//   margin-top: 5px;
-//   width: 28px;
-//   font-size: 6px;
-//   height: 12px;
-//   border: none;
-//   border-radius: 10px;
-//   background-color: deepskyblue;
-//   outline: none;
-//   cursor: pointer;
-
-//   ${(props) =>
-//     props.randomcoloranswer &&
-//     css`
-//       color: red;
-//     `};
-// `;
+import styled from "styled-components";
 
 export const AnswersContainer = styled.div`
   display: flex;
@@ -32,7 +14,7 @@ export const AnswersContainer = styled.div`
     font-size: 3rem;
   }
 
-  div{
+  div {
     margin: 10px;
     border: 3px solid #afb5d8;
   }
@@ -43,7 +25,6 @@ export const AnswersContainer = styled.div`
     color: #afb5d8;
   }
 
-
   h3,
   p {
     padding: 3px;
@@ -52,20 +33,15 @@ export const AnswersContainer = styled.div`
     font-size: 16px;
   }
 
-
-
   p {
     color: #ffffff;
   }
 
-  .question, .answer {
+  .question,
+  .answer {
     margin-left: 15px;
     margin-right: 15px;
   }
-
-  // .answer {
-  //   color: red;
-  // }
 
   @media only screen and (min-width: 768px) {
     h3 {

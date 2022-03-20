@@ -8,7 +8,7 @@ export const PlayerDataProvider = ({ children }) => {
     <PlayerDataContext.Provider
       value={{
         name,
-        setName,
+        setName
       }}
     >
       {children}

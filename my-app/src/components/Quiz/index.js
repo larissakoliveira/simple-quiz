@@ -16,19 +16,24 @@ const Quiz = () => {
     score,
     nextQuestionIndex,
     questions,
-    handleAnswer,
+    handleAnswer
   } = useContext(QuestionsContext);
 
   return (
     <QuizContainer>
-      <h3 className="level">LEVEL: {level}</h3>
+      <h3 className="level">
+        LEVEL: <span>{level}</span>
+      </h3>
 
       {loading && <h2 className="loading">LOADING YOUR QUIZ...</h2>}
       {nextQuestionIndex < 10 ? (
         <>
           <h2 className="questionTitle">Question {nextQuestionIndex + 1}</h2>
 
-          <h3>{questions[nextQuestionIndex]["question"] && questions[nextQuestionIndex]["question"]}</h3>      
+          <h3>
+            {questions[nextQuestionIndex]["question"] &&
+              questions[nextQuestionIndex]["question"]}
+          </h3>
         </>
       ) : (
         <>
@@ -70,8 +75,8 @@ const Quiz = () => {
                 className="options"
                 key={key}
                 onClick={() => {
-                  handleAnswer(key)
-                  }}
+                  handleAnswer(key);
+                }}
               >
                 {value}
               </button>

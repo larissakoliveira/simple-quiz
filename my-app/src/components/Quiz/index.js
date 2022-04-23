@@ -16,7 +16,7 @@ const Quiz = () => {
     score,
     nextQuestionIndex,
     questions,
-    handleAnswer,
+    handleAnswer
   } = useContext(QuestionsContext);
 
   return (

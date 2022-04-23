@@ -10,7 +10,7 @@ const Form = () => {
     setLevel,
     getQuiz,
     setShowComponent,
-    questionsWithFourAnswersAndNoMultipleAnswers,
+    questionsWithFourAnswersAndNoMultipleAnswers
   } = useContext(QuestionsContext);
 
   useEffect(() => {

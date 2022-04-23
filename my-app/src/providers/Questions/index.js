@@ -20,8 +20,8 @@ export const QuestionsProvider = ({ children }) => {
     await api
       .get(`/questions?difficulty=${level}`, {
         headers: {
-          "X-API-Key": "7i20PPyZlYkPlzj7MR0SIHgzsvZTIDu995swtpuN",
-        },
+          "X-API-Key": "7i20PPyZlYkPlzj7MR0SIHgzsvZTIDu995swtpuN"
+        }
       })
       .then((response) => {
         setLoading(false);
@@ -96,7 +96,7 @@ export const QuestionsProvider = ({ children }) => {
     setNextQuestionIndex(nextQuestionIndex + 1);
     setQuestionsText([
       ...questionsText,
-      questions[nextQuestionIndex]["question"],
+      questions[nextQuestionIndex]["question"]
     ]);
   };
 

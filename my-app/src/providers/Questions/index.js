@@ -7,15 +7,13 @@ export const QuestionsContext = createContext();
 export const QuestionsProvider = ({ children }) => {
   const [questions, setQuestions] = useState([]);
   const [data, setData] = useState("");
-  const [level, setLevel] = useState("Easy");
+  const [level, setLevel] = useState("easy");
   const [showComponent, setShowComponent] = useState("home");
   const [loading, setLoading] = useState(true);
   const [nextQuestionIndex, setNextQuestionIndex] = useState(0);
   const [questionsText, setQuestionsText] = useState([]);
   const [correctAnswerText, setCorrectAnswerText] = useState([]);
   const [score, setScore] = useState(0);
-  const [randomcoloranswer, setRandomColorAnswer] = useState()
-  console.log(correctAnswerText)
 
   const getQuiz = async () => {
     setLoading(true);
@@ -45,12 +43,12 @@ export const QuestionsProvider = ({ children }) => {
             auxArray.push(item);
           }
         }
-        const filteredQuestions = auxArray.filter((item) => item.multiple_correct_answers === "false")
-        .slice(0, 10);
+        const filteredQuestions = auxArray
+          .filter((item) => item.multiple_correct_answers === "false")
+          .slice(0, 10);
         setQuestions(filteredQuestions);
       });
   };
-
 
   const handleAnswer = (item) => {
     const correctAnswers = [];
@@ -75,14 +73,12 @@ export const QuestionsProvider = ({ children }) => {
     if (playerAnswer) {
       if (playerAnswer === eachCorrectAnswer) {
         setScore(score + 1);
-        setRandomColorAnswer('true')
-        toast.success('Great, right answer!"')
-      }else{
-        toast.error('Ops, wrong answer!')
+        toast.success('Great, right answer!"');
+      } else {
+        toast.error("Ops, wrong answer!");
       }
     }
   };
-  console.log(score)
 
   const getTextRightAnswers = (eachCorrectAnswer) => {
     const answersObj = questions[nextQuestionIndex].answers;
@@ -143,8 +139,7 @@ export const QuestionsProvider = ({ children }) => {
         questions,
         loading,
         level,
-        score,
-        randomcoloranswer
+        score
       }}
     >
       {children}

@@ -28,6 +28,10 @@ export const QuizContainer = styled.div`
     color: #afb5d8;
   }
 
+  span {
+    color: #262834;
+  }
+
   div {
     display: flex;
     flex-direction: column;

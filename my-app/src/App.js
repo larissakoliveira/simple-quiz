@@ -7,9 +7,10 @@ import Answers from "./components/Answers";
 import { QuestionsContext } from "./providers/Questions";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import Loading from "./components/Loading";
 
 export default function App() {
-  const { showComponent } = useContext(QuestionsContext);
+  const { showComponent, loading } = useContext(QuestionsContext);
 
   return (
     <div className="App">
@@ -29,7 +30,9 @@ export default function App() {
       <Header />
       {showComponent === "home" ? (
         <Form />
-      ) : showComponent === "quiz" ? (
+      ) : loading === true ? (
+        <Loading/>
+      ) : loading === false && showComponent === "quiz" ? (
         <Quiz />
       ) : (
         <Answers />
